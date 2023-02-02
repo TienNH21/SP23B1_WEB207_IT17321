@@ -1,0 +1,6 @@
+- ng-app: chỉ thị dùng để khai báo phạm vi hoạt động của ứng dụng Angular
+- ng-controller: chỉ thị để khai báo phạm vi quản lý của controller.
+- Tên module đăng ký với angular.module sẽ được dùng để ràng buộc lên ng-app ở thẻ body.
+- Tên controller đăng ký với angular.controller sẽ được dùng để ràng buộc lên các thành phần trên giao diện
+    thông qua ng-controller
+- $scope dùng để trao đổi dữ liệu giữa controller và view (giao diện).
