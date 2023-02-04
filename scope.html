@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body ng-app="demo_scope_app">
+
+    <div ng-controller="controller_parent">
+        <!-- div 1 -->
+        <div ng-controller="controller_1">
+            <h2>{{ msg }}</h2>
+            <h1>{{ msg_parent }}</h1>
+            <label>Họ tên</label>
+            <input type="text" ng-model="$parent.ten" />
+        </div>
+        <!-- End div 1 -->
+
+        <!-- div 2 -->
+        <div ng-controller="controller_2">
+            <h2>{{ msg }}</h2>
+            <h1>{{ msg_parent }}</h1>
+            <label>Tuổi</label>
+            <input type="number" ng-model="$parent.tuoi" />
+        </div>
+        <!-- End div 2 -->
+
+        <h1>Xin chào, {{ ten }} - {{ tuoi }}</h1>
+    </div>
+
+    <script src="js/angular.min.js"></script>
+    <script>
+        const app = angular.module("demo_scope_app", []);
+
+        function Controller1($scope) {
+            $scope.msg = "Đây là div 1";
+        }
+
+        function Controller2($scope) {
+            $scope.msg = "Đây là div 2";
+        }
+
+        function ParentController($scope) {
+            $scope.msg_parent = "Đây là div tổng";
+            $scope.ten = "TienNH21";
+            $scope.tuoi = 21;
+        }
+
+        app.controller("controller_1", Controller1);
+        app.controller("controller_2", Controller2);
+        app.controller("controller_parent", ParentController);
+    </script>
+</body>
+</html>

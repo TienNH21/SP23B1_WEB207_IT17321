@@ -10,9 +10,13 @@
     <div ng-controller="my_controller">
         <h1>{{ message }}</h1>
         <h2 ng-bind="message"></h2>
+        <h1>{{ name }}</h1>
+        <input type="text" ng-model="name" />
+        <button ng-click="btnOnClick()">Click me</button>
     </div>
 
     <script src="js/angular.min.js"></script>
+    <script src="controllers/HelloController.js"></script>
     <script>
         // B1: Tạo module app từ angular
         const app = angular.module("myapp", []);
@@ -20,12 +24,9 @@
         // B2: khai báo phạm vi ứng dụng với ng-app ở thẻ body
 
         // B3: Tạo ra 1 function để quản lí 1 vùng giao diện: thẻ div
-        function myFunction($scope) {
-            $scope.message = "Hello IT17323";
-        }
 
         // B4: Đăng ký function vừa tạo vào app với vai trò là 1 controller
-        app.controller("my_controller", myFunction);
+        app.controller("my_controller", HelloController);
 
         // B5: Khai báo phạm vi hoạt động của controller với ng-controller
     </script>

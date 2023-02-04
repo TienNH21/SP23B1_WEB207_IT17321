@@ -4,3 +4,7 @@
 - Tên controller đăng ký với angular.controller sẽ được dùng để ràng buộc lên các thành phần trên giao diện
     thông qua ng-controller
 - $scope dùng để trao đổi dữ liệu giữa controller và view (giao diện).
+- ng-bind: ràng buộc dữ liệu 1 chiều, lấy dữ liệu từ $scope trong controller để hiển thị lên View.
+- ng-model: ràng buộc dữ liệu 2 chiều, thường được sử dụng với các thành phần trong form: input, select.
+    Chiều thứ nhất: lấy dữ liệu từ $scope trong Controller để hiển thị lên input/select (View).
+    Chiều thứ hai:  lấy dữ liệu từ input/select trên View để cập nhật lại $scope trong Controller.
