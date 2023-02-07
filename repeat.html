@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+</head>
+<body ng-app="demo_repeat_app">
+
+    <div ng-controller="my_controller" class="col-6 offset-3">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>Name</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="product in listProduct">
+                    <td>{{ $index }}</td>
+                    <td>{{ product.name }}</td>
+                    <td>{{ product.price }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script src="js/angular.min.js"></script>
+    <script>
+        const app = angular.module("demo_repeat_app", []);
+        function myController($scope) {
+            $scope.listProduct = [
+                { name: "Nokia", price: 3000 },
+                { name: "Oppo", price: 5000 },
+                { name: "Samsung", price: 10000 },
+                { name: "iPhone", price: 15000 },
+            ];
+        }
+
+        app.controller("my_controller", myController);
+    </script>
+</body>
+</html>

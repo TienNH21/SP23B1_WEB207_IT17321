@@ -8,3 +8,15 @@
 - ng-model: ràng buộc dữ liệu 2 chiều, thường được sử dụng với các thành phần trong form: input, select.
     Chiều thứ nhất: lấy dữ liệu từ $scope trong Controller để hiển thị lên input/select (View).
     Chiều thứ hai:  lấy dữ liệu từ input/select trên View để cập nhật lại $scope trong Controller.
+
+- Multi-scope: mỗi Controller có 1 $scope riêng biệt.
+- Nesting-scope: Khi các Controller lồng nhau -> $scope cha sẽ bao hàm các $scope con
+    -> $scope con có thể sử dụng thuộc tính bên trong $scope cha.
+    -> khi cần chia sẻ dữ liệu giữa các $scope con: khai báo ở $scope cha.
+
+- $rootScope: thuộc về thành phần chứa ng-app. Là $scope bao ngoài cùng của module.
+    Dữ liệu khai báo trong $rootScope có thể được chia sẻ cho các $scope con bên trong.
+
+- ng-show: Hiển thị khi điều kiện đúng (Luôn luôn sinh ra thẻ HTML).
+- ng-hide: Ẩn khi điều kiện đúng (Luôn luôn sinh ra thẻ HTML).
+- ng-if: Chỉ sinh ra thẻ html khi điều kiện đúng (có hiển thị).

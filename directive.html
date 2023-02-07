@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body ng-app="demo_directive_app">
+
+    <div ng-controller="my_controller">
+        <h1 ng-show="sinh_vien.diem >= 5">Bạn đã pass môn</h1>
+        <h1 ng-hide="sinh_vien.diem >= 5">Bạn đã tạch môn</h1>
+        <h1 ng-if="sinh_vien.diem >= 5">Bạn đã qua môn</h1>
+
+        <span>{{ sinh_vien.ten }}</span>
+        <br>
+        <span ng-switch="sinh_vien.gioi_tinh">
+            <span ng-switch-when="true">Nam</span>
+            <span ng-switch-default>Nữ</span>
+        </span>
+    </div>
+
+    <script src="js/angular.min.js"></script>
+    <script>
+        const app = angular.module("demo_directive_app", []);
+        function myController($scope) {
+            $scope.sinh_vien = {
+                ten: "Ng Van A",
+                diem: 2,
+                gioi_tinh: false,
+                chuyen_nganh: "PTPM"
+            };
+        }
+
+        app.controller("my_controller", myController);
+    </script>
+</body>
+</html>
