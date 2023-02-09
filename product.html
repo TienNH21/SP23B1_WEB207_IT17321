@@ -9,29 +9,56 @@
 </head>
 <body ng-app="product_module">
     <div ng-controller="product_controller" class="col-6 offset-3">
-        <form method="" action="">
+        <form method="" action="" name="form_product">
             <div class="mt-2">
                 <label>Name</label>
-                <input type="text" name="name" class="form-control" />
+                <input type="text" name="name" class="form-control" ng-model="product.name" required />
+                <span class="text-danger"
+                    ng-show="form_product.name.$invalid && form_product.name.$touched">
+                    Không được để trống
+                </span>
             </div>
             <div class="mt-2">
                 <label>Price</label>
-                <input type="number" name="price" class="form-control" />
+                <input type="number" name="price" class="form-control" ng-model="product.price" required />
+                <span class="text-danger"
+                    ng-show="form_product.price.$invalid && form_product.price.$touched">
+                    Không được để trống
+                </span>
+                <span class="text-danger"
+                    ng-show="form_product.price.$invalid && form_product.price.$touched">
+                    Phải là số
+                </span>
             </div>
             <div class="mt-2">
                 <label>Status</label>
                 <div>
-                    <input type="radio" name="status" value="0" class="form-check-inline" />
+                    <input type="radio" name="status" class="form-check-inline"
+                        value="false" ng-model="product.status"
+                        ng-checked="product.status == false"
+                        required
+                    />
                     <label>Không hoạt động</label>
-                    <input type="radio" name="status" value="1" class="form-check-inline" />
+                    <input type="radio" name="status" class="form-check-inline"
+                        value="true" ng-model="product.status"
+                        ng-checked="product.status == true"
+                        required
+                    />
                     <label>Đang hoạt động</label>
                 </div>
             </div>
             <div class="mt-2">
                 <label>Category</label>
-                <select class="form-select">
+                <select class="form-select" ng-model="product.category" required>
                     <option selected disabled>Chọn danh mục</option>
+                    <option ng-repeat="cate in listCategory" value="{{ cate.id }}">
+                        {{ cate.name }}
+                    </option>
                 </select>
+
+                <!-- <select class="form-select" ng-model="product.category"
+                    ng-options="category.name for category in listCategory">
+                </select> -->
             </div>
 
             <button class="btn btn-primary mt-2">Submit</button>
@@ -62,6 +89,19 @@
     <script>
         const app = angular.module("product_module", []);
         function productController($scope) {
+            $scope.product = {
+                name: "",
+                price: 0,
+                status: true,
+                category: 1
+            };
+
+            $scope.listCategory = [
+                { id: 1, name: "Áo Nam" },
+                { id: 2, name: "Áo Nữ" },
+                { id: 3, name: "Áo Trẻ em" },
+            ];
+
             $scope.listProduct = [
                 { name: "Nokia", price: 3000, status: true, category: 1 },
                 { name: "Oppo", price: 5000, status: true, category: 1 },
