@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+</head>
+<body ng-app="product_module">
+    <div ng-controller="product_controller" class="col-6 offset-3">
+        <form method="" action="">
+            <div class="mt-2">
+                <label>Name</label>
+                <input type="text" name="name" class="form-control" />
+            </div>
+            <div class="mt-2">
+                <label>Price</label>
+                <input type="number" name="price" class="form-control" />
+            </div>
+            <div class="mt-2">
+                <label>Status</label>
+                <div>
+                    <input type="radio" name="status" value="0" class="form-check-inline" />
+                    <label>Không hoạt động</label>
+                    <input type="radio" name="status" value="1" class="form-check-inline" />
+                    <label>Đang hoạt động</label>
+                </div>
+            </div>
+            <div class="mt-2">
+                <label>Category</label>
+                <select class="form-select">
+                    <option selected disabled>Chọn danh mục</option>
+                </select>
+            </div>
+
+            <button class="btn btn-primary mt-2">Submit</button>
+        </form>
+        <table class="table mt-4">
+            <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Category</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="product in listProduct">
+                    <td>{{ $index }}</td>
+                    <td>{{ product.name }}</td>
+                    <td>{{ product.price }}</td>
+                    <td>{{ product.category }}</td>
+                    <td>{{ product.status }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script src="js/angular.min.js"></script>
+    <script>
+        const app = angular.module("product_module", []);
+        function productController($scope) {
+            $scope.listProduct = [
+                { name: "Nokia", price: 3000, status: true, category: 1 },
+                { name: "Oppo", price: 5000, status: true, category: 1 },
+                { name: "Samsung", price: 10000, status: true, category: 1 },
+                { name: "iPhone", price: 15000, status: true, category: 1 },
+            ];
+        }
+
+        app.controller("product_controller", productController);
+    </script>
+</body>
+</html>
