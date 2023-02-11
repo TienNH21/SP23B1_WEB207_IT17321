@@ -22,11 +22,11 @@
                 <label>Price</label>
                 <input type="number" name="price" class="form-control" ng-model="product.price" required />
                 <span class="text-danger"
-                    ng-show="form_product.price.$invalid && form_product.price.$touched">
+                    ng-show="form_product.price.$error.required && form_product.price.$touched">
                     Không được để trống
                 </span>
                 <span class="text-danger"
-                    ng-show="form_product.price.$invalid && form_product.price.$touched">
+                    ng-show="form_product.price.$error.number && form_product.price.$touched">
                     Phải là số
                 </span>
             </div>
@@ -50,8 +50,9 @@
             <div class="mt-2">
                 <label>Category</label>
                 <select class="form-select" ng-model="product.category" required>
-                    <option selected disabled>Chọn danh mục</option>
-                    <option ng-repeat="cate in listCategory" value="{{ cate.id }}">
+                    <option
+                        ng-repeat="cate in listCategory"
+                        value="{{ cate.id }}">
                         {{ cate.name }}
                     </option>
                 </select>
@@ -61,7 +62,17 @@
                 </select> -->
             </div>
 
-            <button class="btn btn-primary mt-2">Submit</button>
+            <button
+                class="btn btn-primary mt-2"
+                ng-click="save($event)">
+                Submit
+            </button>
+
+            <button
+                class="btn btn-secondary mt-2"
+                ng-click="clear($event)">
+                Clear
+            </button>
         </form>
         <table class="table mt-4">
             <thead>
@@ -71,6 +82,7 @@
                     <th>Price</th>
                     <th>Category</th>
                     <th>Status</th>
+                    <th colspan="2">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -80,6 +92,23 @@
                     <td>{{ product.price }}</td>
                     <td>{{ product.category }}</td>
                     <td>{{ product.status }}</td>
+                    <td>
+                        <button
+                            class="btn btn-primary"
+                            href="#"
+                            ng-click="btnUpdateOnClick($event, $index)"
+                            >
+                            Update
+                        </button>
+                    </td>
+                    <td>
+                        <button
+                            class="btn btn-danger"
+                            ng-click="btnDeleteOnClick($event, $index)"
+                            href="#">
+                            Delete
+                        </button>
+                    </td>
                 </tr>
             </tbody>
         </table>
@@ -89,6 +118,8 @@
     <script>
         const app = angular.module("product_module", []);
         function productController($scope) {
+            // Nếu updateIndex == -1 -> Thêm mới, còn nếu updateIndex >= 0 -> Cập nhật
+            $scope.updateIndex = -1;
             $scope.product = {
                 name: "",
                 price: 0,
@@ -104,10 +135,68 @@
 
             $scope.listProduct = [
                 { name: "Nokia", price: 3000, status: true, category: 1 },
-                { name: "Oppo", price: 5000, status: true, category: 1 },
+                { name: "Oppo", price: 5000, status: false, category: 1 },
                 { name: "Samsung", price: 10000, status: true, category: 1 },
                 { name: "iPhone", price: 15000, status: true, category: 1 },
             ];
+
+            function them() {
+                $scope.listProduct.push( $scope.product );
+                $scope.product = {
+                    name: "",
+                    price: 0,
+                    status: true,
+                    category: 1
+                };
+            }
+
+            function sua()
+            {
+                // $scope.listProduct[$scope.updateIndex] = $scope.product;
+                $scope.listProduct[$scope.updateIndex] = Object.assign({}, $scope.product);
+            }
+
+            $scope.clear = function (event) {
+                event.preventDefault();
+                $scope.product = {
+                    name: "",
+                    price: 0,
+                    status: true,
+                    category: 1
+                };
+                $scope.updateIndex = -1;
+            }
+
+            $scope.save = function (event) {
+                // Chặn hành động mặc định của form (sự kiện submit sẽ gây tải lại page)
+                // console.log(event)
+                event.preventDefault();
+
+                if ($scope.updateIndex == -1) {
+                    them();
+                } else {
+                    sua();
+                }
+            }
+
+            $scope.btnDeleteOnClick = function(event, index) {
+                event.preventDefault();
+
+                $scope.listProduct.splice(index, 1);
+            }
+
+            $scope.btnUpdateOnClick = function(event, index) {
+                event.preventDefault();
+
+                const p = $scope.listProduct[index];
+                $scope.product.name = p.name;
+                $scope.product.price = p.price;
+                $scope.product.status = p.status;
+                $scope.product.category = p.category;
+                $scope.updateIndex = index;
+            }
+
+
         }
 
         app.controller("product_controller", productController);
