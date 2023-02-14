@@ -117,7 +117,7 @@
     <script src="js/angular.min.js"></script>
     <script>
         const app = angular.module("product_module", []);
-        function productController($scope) {
+        function productController($scope, $http) {
             // Nếu updateIndex == -1 -> Thêm mới, còn nếu updateIndex >= 0 -> Cập nhật
             $scope.updateIndex = -1;
             $scope.product = {
@@ -133,12 +133,12 @@
                 { id: 3, name: "Áo Trẻ em" },
             ];
 
-            $scope.listProduct = [
-                { name: "Nokia", price: 3000, status: true, category: 1 },
-                { name: "Oppo", price: 5000, status: false, category: 1 },
-                { name: "Samsung", price: 10000, status: true, category: 1 },
-                { name: "iPhone", price: 15000, status: true, category: 1 },
-            ];
+            $scope.listProduct = [];
+            const productApi = "http://localhost:3000/products";
+            $http.get(productApi)
+                .then(function (response) {
+                    $scope.listProduct = response.data;
+                });
 
             function them() {
                 $scope.listProduct.push( $scope.product );
