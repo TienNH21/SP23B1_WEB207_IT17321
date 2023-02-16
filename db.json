@@ -1,12 +1,42 @@
 {
-    "categories" : [
-        { "id": 1, "name": "Ao" },
-        { "id": 2, "name": "Quan" }
-    ],
-    "products": [
-        { "id": 1,"name": "Ao 1", "price": 3000, "status": true, "category": 1 },
-        { "id": 2,"name": "Ao 2", "price": 5000, "status": false, "category": 1 },
-        { "id": 3,"name": "Quan 1", "price": 10000, "status": true, "category": 2 },
-        { "id": 4,"name": "Quan 2", "price": 15000, "status": true, "category": 2 }
-    ]
+  "categories": [
+    {
+      "id": 1,
+      "name": "Ao"
+    },
+    {
+      "id": 2,
+      "name": "Quan"
+    }
+  ],
+  "products": [
+    {
+      "name": "Ao 9",
+      "price": 3000,
+      "status": true,
+      "category": "1",
+      "id": 1
+    },
+    {
+      "id": 2,
+      "name": "Ao 2",
+      "price": 5000,
+      "status": false,
+      "category": 1
+    },
+    {
+      "id": 3,
+      "name": "Quan 1",
+      "price": 10000,
+      "status": true,
+      "category": 2
+    },
+    {
+      "id": 4,
+      "name": "Quan 2",
+      "price": 15000,
+      "status": true,
+      "category": 2
+    }
+  ]
 }

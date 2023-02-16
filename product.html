@@ -141,19 +141,36 @@
                 });
 
             function them() {
-                $scope.listProduct.push( $scope.product );
-                $scope.product = {
-                    name: "",
-                    price: 0,
-                    status: true,
-                    category: 1
-                };
+                const apiThem = productApi;
+
+                $http.post(apiThem, $scope.product)
+                    .then(function (response) {
+                        // TODO: stop reloading
+                        $scope.listProduct.push( $scope.product );
+                        $scope.product = {
+                            name: "",
+                            price: 0,
+                            status: true,
+                            category: 1
+                        };
+                    })
             }
 
             function sua()
             {
-                // $scope.listProduct[$scope.updateIndex] = $scope.product;
-                $scope.listProduct[$scope.updateIndex] = Object.assign({}, $scope.product);
+
+                const apiCapNhat = productApi + "/" + $scope.listProduct[$scope.updateIndex].id;
+                $http.put(apiCapNhat, $scope.product)
+                    .then(function (response) {
+                        // TODO: stop reloading
+                        $scope.listProduct[$scope.updateIndex] = Object.assign({}, $scope.product);
+                        $scope.product = {
+                            name: "",
+                            price: 0,
+                            status: true,
+                            category: 1
+                        };
+                    })
             }
 
             $scope.clear = function (event) {
@@ -182,7 +199,12 @@
             $scope.btnDeleteOnClick = function(event, index) {
                 event.preventDefault();
 
-                $scope.listProduct.splice(index, 1);
+                const apiXoa = productApi + "/" + $scope.listProduct[index].id;
+                $http.delete(apiXoa)
+                    .then(function (response) {
+                        // TODO: stop reloading
+                        $scope.listProduct.splice(index, 1);
+                    })
             }
 
             $scope.btnUpdateOnClick = function(event, index) {
