@@ -37,6 +37,20 @@
       "price": 15000,
       "status": true,
       "category": 2
+    },
+    {
+      "name": "TienNH21",
+      "price": 123,
+      "status": true,
+      "category": "1",
+      "id": 5
+    },
+    {
+      "name": "Nguyễn Kim Lương",
+      "price": 43,
+      "status": true,
+      "category": "3",
+      "id": 6
     }
   ]
 }

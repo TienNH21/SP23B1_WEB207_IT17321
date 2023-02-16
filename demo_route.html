@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body ng-app="myapp">
+    <div>
+        <a href="#red">Red</a>
+        <a href="#blue">Blue</a>
+        <a href="#green">Green</a>
+    </div>
+    <div ng-view></div>
+
+    <script src="js/angular.min.js"></script>
+    <script src="js/angular-route.js"></script>
+    <script src="controllers/RedController.js"></script>
+    <script src="controllers/BlueController.js"></script>
+    <script src="controllers/GreenController.js"></script>
+    <script>
+        const app = angular.module("myapp", [ "ngRoute" ]);
+
+        app.controller('RedController', RedController);
+        app.controller('BlueController', BlueController);
+        app.controller('GreenController', GreenController);
+
+        app.config(function ($routeProvider, $locationProvider) {
+            $locationProvider.hashPrefix('');
+            $routeProvider
+                .when("/red", {
+                    templateUrl: "views/red.html",
+                    controller: "RedController"
+                })
+                .when("/blue", {
+                    templateUrl: "views/blue.html",
+                    controller: "BlueController"
+                })
+                .when("/green", {
+                    templateUrl: "views/green.html",
+                    controller: "GreenController"
+                })
+        });
+    </script>
+</body>
+</html>
